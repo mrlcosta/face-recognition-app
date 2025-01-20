@@ -91,7 +91,7 @@ export  function Home() {
      />
 
 
-    <TouchableOpacity onPress={(e) => setIsActive(true)}>
+    <TouchableOpacity onPress={(e) => setIsActive(true)} style={{height: 40}}>
       <Text>
         ativar
       </Text>
