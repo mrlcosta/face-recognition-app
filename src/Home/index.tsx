@@ -28,6 +28,7 @@ export  function Home() {
   } = useCameraPermission()
 
   if(!hasPermission) {
+    requestPermission()
     console.log('Not camera permission')
   }
 
@@ -35,8 +36,6 @@ export  function Home() {
     width,
     height
   } = useWindowDimensions()
-  
-
   
 
   const faceDetectionOptions = useRef<FaceDetectionOptions>( {
