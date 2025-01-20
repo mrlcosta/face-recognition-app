@@ -1,5 +1,6 @@
 import { 
   Text, 
+  TouchableOpacity, 
   useWindowDimensions, 
   View 
 } from 'react-native'
@@ -16,11 +17,12 @@ import {
 } from 'react-native-vision-camera'
 
 import { styles } from './styles'
-import { Face, FaceDetectionOptions, Camera } from 'react-native-vision-camera-face-detector'
+import { Face, FaceDetectionOptions, Camera,  } from 'react-native-vision-camera-face-detector'
 
 export  function Home() {
 
   const [faceDetected, setFaceDetected] = useState<boolean>(false)
+  const [isActive, setIsActive] =useState<boolean>(false)
 
   const {
     hasPermission,
@@ -63,9 +65,6 @@ export  function Home() {
     if (face) {
 
       // console.log(face)
-      setFaceDetected(true) 
-
-      
       if(face.leftEyeOpenProbability > 0.5 && face.rightEyeOpenProbability < 0.5){
         console.log('piscou o olho ESQUERDO')
        
@@ -74,8 +73,6 @@ export  function Home() {
         console.log('piscou o olho DIREITO')
       }
 
-    }else {
-      setFaceDetected(false)
     }
 
     
@@ -86,13 +83,20 @@ export  function Home() {
   return (
     <View style={styles.container}>
        <Camera
-        isActive={true}
+        isActive={isActive}
         style={styles.camera}
         device={device}   
         faceDetectionCallback={handleFacesDetection}
-        faceDetectionOptions={faceDetectionOptions}
-        
+        faceDetectionOptions={faceDetectionOptions}          
      />
+
+
+    <TouchableOpacity onPress={(e) => setIsActive(true)}>
+      <Text>
+        ativar
+      </Text>
+    </TouchableOpacity>
+
     </View>
   )
 }
